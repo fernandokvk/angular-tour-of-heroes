@@ -7,22 +7,25 @@ import { FormsModule } from '@angular/forms';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
-import { DashboardComponent } from './dashboard/dashboard.component'; // <-- NgModel lives here
-
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
+import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api"; // <-- NgModel lives here
+import {InMemoryDataService} from './in-memory-data.service';
+import { HeroSearchComponent } from './hero-search/hero-search.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    HeroSearchComponent,
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-  ],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule,
+  HttpClientInMemoryWebApiModule.forRoot(
+    InMemoryDataService, {dataEncapsulation: false}
+  )],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
